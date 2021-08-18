@@ -25,7 +25,7 @@ if choice=='Home':
 
     st.latex(r''' e^{i\pi} + 1 = 0 ''')
 
-    col1, col2, col3 = st.beta_columns(3)
+    col1, col2, col3 = st.columns(3)
 
     # NAME
     with col1:
