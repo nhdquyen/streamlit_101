@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-# import cv2
+import cv2
 import matplotlib.pyplot as plt
 
 PATH = 'media/AB_NYC_2019.csv'
@@ -73,12 +73,12 @@ elif choice=='Display Images':
     st.title('Puppy can display images!')
     photo_uploaded = st.file_uploader('Choose your best puppy photo', ['png', 'jpg', 'jpeg'])
     if photo_uploaded != None:
-        # image_np = np.asarray(bytearray(photo_uploaded.read()), dtype=np.uint8)
-        # # print(image_np)
-        # # print(image_np.shape)
-        # img = cv2.imdecode(image_np, 1)
-        # img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-        # st.image(img)
+        image_np = np.asarray(bytearray(photo_uploaded.read()), dtype=np.uint8)
+        # print(image_np)
+        # print(image_np.shape)
+        img = cv2.imdecode(image_np, 1)
+        img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+        st.image(img)
 
         st.write(photo_uploaded.size)
         st.write(photo_uploaded.type)
@@ -90,17 +90,17 @@ elif choice=='Play Videos':
         st.video(video_uploaded)
 
 elif choice=="Show Webcam":
-    st.title("Webcam Live Feed!")
+    st.title("Webcam Live Feed! ** Work on local computer ONLY **")
     run = st.checkbox('Show!')
     FRAME_WINDOW = st.image([])
-    # camera = cv2.VideoCapture(0)
+    camera = cv2.VideoCapture(0)
 
-    # while run:
-    #     _, frame = camera.read()
-    #     frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-    #     FRAME_WINDOW.image(frame)
-    # else:
-    #     st.write("Stop!")
+    while run:
+        _, frame = camera.read()
+        frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+        FRAME_WINDOW.image(frame)
+    else:
+        st.write("Stop!")
 
 elif choice=='Play Music':
     st.title("Puppy can rock!")
