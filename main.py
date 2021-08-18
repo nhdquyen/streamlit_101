@@ -1,8 +1,8 @@
 import streamlit as st
 import pandas as pd
-import matplotlib.pyplot as plt
 import numpy as np
 import cv2
+import matplotlib.pyplot as plt
 
 PATH = 'media/AB_NYC_2019.csv'
 
