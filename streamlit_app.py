@@ -85,12 +85,14 @@ elif choice=='Display Images':
 
 elif choice=='Play Videos':
     st.title('Puppy can play videos!')
+    st.warning("Sounds available on local computer ONLY")
     video_uploaded = st.file_uploader('Import your amazing video', type=['mp4'])
     if video_uploaded != None:
         st.video(video_uploaded)
 
 elif choice=="Show Webcam":
-    st.title("Webcam Live Feed! ** Work on local computer ONLY **")
+    st.title("Webcam Live Feed!")
+    st.warning("Work on local computer ONLY")
     run = st.checkbox('Show!')
     FRAME_WINDOW = st.image([])
     camera = cv2.VideoCapture(0)
@@ -104,6 +106,7 @@ elif choice=="Show Webcam":
 
 elif choice=='Play Music':
     st.title("Puppy can rock!")
+    st.warning("Sounds available on local computer ONLY")
     audio_uploaded = st.file_uploader("Choose your fav song")
     if audio_uploaded != None:
         audio = audio_uploaded.read()
