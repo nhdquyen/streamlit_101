@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 # import cv2
-import matplotlib.pyplot as plt
+# import matplotlib.pyplot as plt
 
 PATH = 'media/AB_NYC_2019.csv'
 
@@ -60,10 +60,10 @@ elif choice=='Read Data':
     df = load_data(PATH) 
     st.dataframe(df)
 
-    figure, ax = plt.subplots() # A must in Streamlit
-    df.groupby('neighbourhood_group')['price'].mean().plot(kind="barh", ax=ax)
-    st.pyplot(figure)
-    st.write('This is a cool chart!')
+    # figure, ax = plt.subplots() # A must in Streamlit
+    # df.groupby('neighbourhood_group')['price'].mean().plot(kind="barh", ax=ax)
+    # st.pyplot(figure)
+    # st.write('This is a cool chart!')
 
     price = st.slider('Consider about the price', min_value=10, max_value=100)
     filter = df[df['price']<price]
