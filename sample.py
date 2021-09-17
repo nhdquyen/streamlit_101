@@ -118,4 +118,3 @@ elif choice=='About me':
     st.success('An awesome guy!')
     st.image('media/9e1b49d166612f7a7846aa5b77b871c7.gif')
     st.balloons()
-
