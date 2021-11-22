@@ -34,9 +34,8 @@ elif choice == 'Testing':
             st.image(fileup)   
             image_np = np.asarray(bytearray(fileup.read()), dtype = np.uint8)    
             img = cv2.imdecode(image_np,1)
-            # st.image(fileup)
-            # fileup = np.array(fileup)
-            # fileup = cv2.resize(fileup, (224,224))
+            img = cv2.resize(img, (224,224))
+ 
             img_array  = np.expand_dims(img, axis=0)
             prediction = model.predict(img_array)
             pred_indices = np.argmax(prediction, axis = 1)
