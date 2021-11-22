@@ -4,22 +4,25 @@ import numpy as np
 import cv2
 import tensorflow as tf
 
+st.header('HUMBLE MACHINE LEARNING MODEL')
 
-menu = ['Home', 'About Me', 'Testing', 'Read Data']
-choice = st.sidebar.selectbox('Menu', menu)
-if choice == 'Home':
-    st.write('Hello World')
-    st.header('First ML Model')
-    st.image('media/dog-beach-lifesaver.png')
-    dog_name = st.text_input("What's your dog name?")
-    if len(dog_name) > 0:
-        st.write('Hello,', dog_name)
-elif choice == 'Read Data':
-    df = pd.read_csv('media/AB_NYC_2019.csv')
-    st.dataframe(df)
+menu = ['Model Info', 'Testing']
+choice = st.sidebar.radio('Menu', menu)
+if choice == 'Model Info':
+    st.image('media/Should-I-Choose-Machine-Learning-or-Big-Data.jpeg')
+    st.text('This is Quyên. Thank you for testing with my very first Machine Learning model.')
+    name = st.text_input('Before going any further, may I know your name?')
+    if len(name) > 0:
+        st.write(f'Hello, {name}. A nice name you have!')
+        st.text('This model is compiled with two main parts: 1-Feature Extraction which is the pretrained \nDenseNet121 and 2-Classification with one Global Average layer and finally Softmax on top.')
+        st.text('DenseNet121 was chosen for its light size and ability to capture feature importances which \nis a good fit for classifying VND banknotes.')
+        st.text('At feature extraction layers constructed with 427 layers, or base model for short, is \nlocked with 320 pretrained layers with imagenet.')
+        
+        st.write("Click [here](https://arxiv.org/pdf/1608.06993.pdf) for further study. Now, have fun testing out!")
 
-elif choice == 'About Me':
-    st.audio('media/Impact_Moderato.mp3')
+# elif choice == 'Read Data':
+#     df = pd.read_csv('media/AB_NYC_2019.csv')
+#     st.dataframe(df)
 
 elif choice == 'Testing':
     model_path = 'model/WP8_vn_banknote_model.h5'
@@ -38,8 +41,11 @@ elif choice == 'Testing':
  
             img_array  = np.expand_dims(img, axis=0)
             prediction = model.predict(img_array)
-            pred_indices = np.argmax(prediction, axis = 1)
-            st.write(class_names[pred_indices[0]], 'vnd')
+            if prediction[0].max() < 0.45:
+                st.write('You are funny!')
+            else:
+                pred_indices = np.argmax(prediction, axis = 1)
+                st.write(class_names[pred_indices[0]], 'vnd')
 
     with col2: #webcam 
         cap = cv2.VideoCapture(0)  # device 0
@@ -57,7 +63,7 @@ elif choice == 'Testing':
         while run:
             ret, frame = cap.read()        
             # Display Webcam
-            frame = cv2.flip(frame, 1)
+            #frame = cv2.flip(frame, 1)
             frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB ) #Convert color
             FRAME_WINDOW.image(frame)
 
@@ -77,5 +83,10 @@ elif choice == 'Testing':
             img_array  = np.expand_dims(captured_image, axis=0)
             #Check the img_array here
             prediction = model.predict(img_array)
-            pred_indices = np.argmax(prediction, axis = 1)
-            st.write(class_names[pred_indices[0]], 'vnd')
+            if prediction[0].max() < 0.45:
+                st.write('You are funny!')
+            else:
+                pred_indices = np.argmax(prediction, axis = 1)
+                st.write(class_names[pred_indices[0]], 'vnd')
+            
+            
